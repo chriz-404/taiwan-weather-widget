@@ -10,8 +10,8 @@
       padding: 6px 10px;
       color: #ddd;
       font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif;
+      text-align: center;
     }
-    #sun .hint { color: #999; }
     #widget { width: 100%; overflow: hidden; }
     #widget iframe {
       width: 125%;
@@ -37,11 +37,11 @@
     };
 
     const places = {
-      taipei:     { name: "Taipeh",     lat: 25.03, lon: 121.56 },
-      alishan:    { name: "Alishan",    lat: 23.51, lon: 120.80, hint: "Zhushan ca. 05:50 – Aushang am Vorabend prüfen" },
-      xiaoliuqiu: { name: "Xiaoliuqiu", lat: 22.34, lon: 120.37 },
-      kaohsiung:  { name: "Kaohsiung",  lat: 22.63, lon: 120.30 },
-      hualien:    { name: "Hualien",    lat: 23.99, lon: 121.60 }
+      taipei:     { lat: 25.03, lon: 121.56 },
+      alishan:    { lat: 23.51, lon: 120.80 },
+      xiaoliuqiu: { lat: 22.34, lon: 120.37 },
+      kaohsiung:  { lat: 22.63, lon: 120.30 },
+      hualien:    { lat: 23.99, lon: 121.60 }
     };
 
     // Sonnenauf-/-untergang nach der NOAA-Näherung (genau auf ca. 1 Minute)
@@ -75,9 +75,8 @@
     function renderSun(location) {
       const place = places[location];
       const { rise, set } = sunTimes(taipeiDate(), place.lat, place.lon);
-      const hint = place.hint ? ` · <span class="hint">${place.hint}</span>` : "";
-      document.getElementById("sun").innerHTML =
-        `🌅 ${taipeiTime(rise)} · 🌇 ${taipeiTime(set)} · ${place.name}${hint}`;
+      document.getElementById("sun").textContent =
+        `🌅 ${taipeiTime(rise)} · 🌇 ${taipeiTime(set)}`;
     }
 
     function taipeiDate() {
